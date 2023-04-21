@@ -6,14 +6,14 @@ const {
   postPhotos,
   like,
   getPhotos,
-  deletePhoto,
   deleteAll,
+  deletePhoto
 } = require("../controllers/photosControllers");
 
 router.post("/postPhotos", authorize, postPhotos);
-router.get("/getPhotos", authorize, getPhotos);
+router.get("/getPhotos", getPhotos);
 router.put("/likes/:id",authorize, like);
+router.delete("/deleteAll/", deleteAll)
 router.delete("/delete/:id", deletePhoto)
-router.delete("/delete",  deleteAll)
 
 module.exports = router;

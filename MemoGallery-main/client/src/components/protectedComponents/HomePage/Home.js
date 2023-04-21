@@ -1,8 +1,11 @@
 import "./cards.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import {useNavigate} from "react-router-dom"
+
 function HomePage() {
-  const [photos, setPhotos] = useState([]);
+  const [photos, setPhotos] = useState([true]);
+  const navigate = useNavigate();
 
   async function getAllPhotos() {
     const token = localStorage.getItem("token");
@@ -36,12 +39,15 @@ function HomePage() {
   useEffect(() => {
     getAllPhotos();
   }, []);
-
+ 
   async function handleDelete() {
+    
     await axios
-      .delete("http://localhost:8080/auth/delete")
+      .delete("http://localhost:8080/auth/deleteAll")
       .then((response) => {
-        console.log(response);
+        navigate("/postPhotos");
+        window.location.reload()
+        console.log("photo deleted");
       })
       .catch((error) => {
         console.log(error);
@@ -52,7 +58,9 @@ function HomePage() {
       <div className="card-wrapper">
         {photos.map((photo) => {
           return (
+            
             <div className="card" key={photo._id}>
+              
               <div>
                 {photo.photoUrl && <img src={photo.photoUrl} alt="photo" />}
               </div>
@@ -64,11 +72,13 @@ function HomePage() {
                 like{photo.likes}
               </button>
               <input type={photo._id} />
-              <button onClick={handleDelete}>Delete</button>
+              
             </div>
+            
           );
         })}
       </div>
+      <button onClick={handleDelete}>Delete</button>
     </>
   );
 }
