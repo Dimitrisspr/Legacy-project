@@ -1,10 +1,17 @@
 import "./cards.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
+<<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
 
 function HomePage() {
   const [photos, setPhotos] = useState([]);
+=======
+import {useNavigate} from "react-router-dom"
+
+function HomePage() {
+  const [photos, setPhotos] = useState([true]);
+>>>>>>> 8519a8a2c7982202c9ecd4a9ce0e6e8d41499285
   const navigate = useNavigate();
 
   async function getAllPhotos() {
@@ -39,15 +46,22 @@ function HomePage() {
   useEffect(() => {
     getAllPhotos();
   }, []);
-
+ 
   async function handleDelete() {
+    
     await axios
-      .delete("http://localhost:8080/auth/delete")
+      .delete("http://localhost:8080/auth/deleteAll")
       .then((response) => {
+<<<<<<< HEAD
         window.location.reload(false);
         navigate("/postPhotos");
 
         console.log(response);
+=======
+        navigate("/postPhotos");
+        window.location.reload()
+        console.log("photo deleted");
+>>>>>>> 8519a8a2c7982202c9ecd4a9ce0e6e8d41499285
       })
       .catch((error) => {
         console.log(error);
@@ -58,7 +72,9 @@ function HomePage() {
       <div className="card-wrapper">
         {photos.map((photo) => {
           return (
+            
             <div className="card" key={photo._id}>
+              
               <div>
                 {photo.photoUrl && <img src={photo.photoUrl} alt="photo" />}
               </div>
@@ -70,7 +86,12 @@ function HomePage() {
                 like{photo.likes}
               </button>
               <input type={photo._id} />
+<<<<<<< HEAD
+=======
+              
+>>>>>>> 8519a8a2c7982202c9ecd4a9ce0e6e8d41499285
             </div>
+            
           );
         })}
       </div>
