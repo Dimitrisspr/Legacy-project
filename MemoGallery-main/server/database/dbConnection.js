@@ -9,7 +9,7 @@ main()
   .then(() => console.log("db connected successfully!"))
   .catch((err) => console.log(err));
   async function main() {
-    await mongoose.connect(DATABASE_URL);
+    await mongoose.connect(URI);
   }
 
 module.exports = main;

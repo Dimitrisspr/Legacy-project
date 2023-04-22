@@ -1,5 +1,5 @@
 const photosModel = require("../models/photosModel");
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const postPhotos = async (req, res) => {
   const { photoUrl, description } = req.body;
@@ -31,7 +31,11 @@ const like = async (req, res) => {
   if (!photo) {
     res.send({ msg: "photo not found" });
   }
-  photo.likesNum = photo.likesNum + 1;
+  if (photo.likesNum / 2 == 0) {
+    photo.likesNum = photo.likesNum + 1;
+  } else {
+    photo.likesNum = photo.likesNum -1
+  }
   console.log(photo.likesNum);
   let updatedLikes = await photo.save();
   res.send(updatedLikes);
@@ -39,22 +43,23 @@ const like = async (req, res) => {
 
 const deletePhoto = async (req, res) => {
   try {
-    let id = req.params.id;
-    const toDelete = await photosModel.deleteOne({_id: mongoose.Types.ObjectId(id)});
+    let {id} = req.params;
+    const toDelete = await photosModel.findByIdAndRemove(id);
     res.status(200).send({ msg: "photoDeleted", toDelete });
     console.log("toDelete");
   } catch (error) {
-    res.send(error);
+    res.status(500).send("an error occurred");
     console.log(error);
   }
 };
 
+
 const deleteAll = async (req, res) => {
   try {
-    const deleteP = await photosModel.deleteMany()
-    res.send({msg: "deleted!", deleteP})
+    const deleteP = await photosModel.deleteMany();
+    res.send({ msg: "deleted!", deleteP });
   } catch (error) {
-    res.send(error)
+    res.send(error);
   }
 };
 

@@ -12,12 +12,8 @@ const {
 
 router.post("/postPhotos", authorize, postPhotos);
 router.get("/getPhotos", getPhotos);
-router.put("/likes/:id",authorize, like);
-router.delete("/deleteAll/", deleteAll)
+router.put("/likes/:id", like);
 router.delete("/delete/:id", deletePhoto)
-<<<<<<< HEAD
-router.delete("/delete", deleteAll)
-=======
->>>>>>> 8519a8a2c7982202c9ecd4a9ce0e6e8d41499285
+router.delete("/delete", authorize, deleteAll)
 
 module.exports = router;

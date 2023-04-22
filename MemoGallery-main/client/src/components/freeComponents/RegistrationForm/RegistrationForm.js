@@ -16,6 +16,7 @@ const RegistrationForm = () => {
     });
     await PostRegistData(userData);
     alert("Registered Successfully");
+    
   };
 
   return (

@@ -1,17 +1,10 @@
 import "./cards.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
-<<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
 
 function HomePage() {
-  const [photos, setPhotos] = useState([]);
-=======
-import {useNavigate} from "react-router-dom"
-
-function HomePage() {
   const [photos, setPhotos] = useState([true]);
->>>>>>> 8519a8a2c7982202c9ecd4a9ce0e6e8d41499285
   const navigate = useNavigate();
 
   async function getAllPhotos() {
@@ -46,35 +39,40 @@ function HomePage() {
   useEffect(() => {
     getAllPhotos();
   }, []);
- 
-  async function handleDelete() {
-    
-    await axios
-      .delete("http://localhost:8080/auth/deleteAll")
-      .then((response) => {
-<<<<<<< HEAD
-        window.location.reload(false);
-        navigate("/postPhotos");
 
-        console.log(response);
-=======
+  async function handleDelete() {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return;
+    }
+    await axios
+      .delete("http://localhost:8080/auth/delete", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
         navigate("/postPhotos");
-        window.location.reload()
-        console.log("photo deleted");
->>>>>>> 8519a8a2c7982202c9ecd4a9ce0e6e8d41499285
+        window.location.reload();
+        console.log(response);
       })
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  async function handleDeleteOne(id) {
+    await axios.delete(`http://localhost:8080/auth/delete/${id}`);
+    // photos.filter((photo) => {
+      window.location.reload();
+    // });
   }
   return (
     <>
       <div className="card-wrapper">
         {photos.map((photo) => {
           return (
-            
             <div className="card" key={photo._id}>
-              
               <div>
                 {photo.photoUrl && <img src={photo.photoUrl} alt="photo" />}
               </div>
@@ -86,15 +84,14 @@ function HomePage() {
                 like{photo.likes}
               </button>
               <input type={photo._id} />
-<<<<<<< HEAD
-=======
-              
->>>>>>> 8519a8a2c7982202c9ecd4a9ce0e6e8d41499285
+              <button onClick={() => handleDeleteOne(photo._id)}>
+                Delete One
+              </button>
             </div>
-            
           );
         })}
       </div>
+
       <button onClick={handleDelete}>Delete</button>
     </>
   );
