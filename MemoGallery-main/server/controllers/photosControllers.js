@@ -26,6 +26,7 @@ const getPhotos = async (req, res) => {
 };
 
 const like = async (req, res) => {
+  let liked = [];
   let id = req.params.id;
   let photo = await photosModel.findById(id);
   if (!photo) {
@@ -34,25 +35,40 @@ const like = async (req, res) => {
   if (photo.likesNum / 2 == 0) {
     photo.likesNum = photo.likesNum + 1;
   } else {
-    photo.likesNum = photo.likesNum -1
+    photo.likesNum = photo.likesNum - 1;
   }
   console.log(photo.likesNum);
+  if (photo.likesNum >= 0) {
+    liked.push(photo);
+  }
   let updatedLikes = await photo.save();
   res.send(updatedLikes);
 };
 
-const deletePhoto = async (req, res) => {
+const favoritePhoto = async (req, res) => {
   try {
-    let {id} = req.params;
-    const toDelete = await photosModel.findByIdAndRemove(id);
-    res.status(200).send({ msg: "photoDeleted", toDelete });
-    console.log("toDelete");
+    const favoritePhoto = [];
+    let likesNum = req.params;
+    const photos = await photosModel.find({ likesNum: { $gt: 0 } });
+    favoritePhoto.push(photos);
+    console.log(favoritePhoto);
+    res.send(photos);
   } catch (error) {
-    res.status(500).send("an error occurred");
-    console.log(error);
+    res.status(500).send("Unable to retrieve photos...");
   }
 };
 
+const deletePhoto = async (req, res) => {
+  try {
+    let { id } = req.params;
+    const toDelete = await photosModel.findByIdAndRemove(id);
+    res.status(204).send({ msg: "photoDeleted", toDelete });
+    console.log("toDelete");
+  } catch (error) {
+    res.status(500).send(error);
+    console.log(error);
+  }
+};
 
 const deleteAll = async (req, res) => {
   try {
@@ -69,4 +85,5 @@ module.exports = {
   like,
   deletePhoto,
   deleteAll,
+  favoritePhoto,
 };

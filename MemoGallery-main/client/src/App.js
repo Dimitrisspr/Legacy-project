@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Nav from "./components/freeComponents/Navbar/Nav";
@@ -10,29 +10,34 @@ import GalleryForm from "./components/protectedComponents/GalleryForm/GalleryFor
 import Favorites from "./components/protectedComponents/Favorites/Favorites";
 import Logout from "./components/protectedComponents/logout/logout";
 
-
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleUserState = (state) => {
-    setIsLoggedIn(state)
-  }
+    setIsLoggedIn(state);
+  };
 
   return (
-      <div>
-        <Nav userState= {isLoggedIn}/>
-        <div className='container'>
-          <Routes>
-            <Route path='/' element={<LandingPage/>} />
-            <Route path='/homePage' element={<HomePage />} />
-            <Route path='/register' element={<RegistrationForm />} />
-            <Route path='/login' element={<LoginForm onLogin = {handleUserState} />} />
-            <Route path='/postPhotos' element={<GalleryForm />} />
-            <Route path='/favourites' element={<Favorites />} />
-            <Route path='/logout' element={<Logout onLogout = {handleUserState}/>} />
-          </Routes>
-        </div>
+    <div>
+      <Nav userState={isLoggedIn} />
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/homePage" element={<HomePage />} />
+          <Route path="/register" element={<RegistrationForm />} />
+          <Route
+            path="/login"
+            element={<LoginForm onLogin={handleUserState} />}
+          />
+          <Route path="/postPhotos" element={<GalleryForm />} />
+          <Route path="/favourites" element={<Favorites />} />
+          <Route
+            path="/logout"
+            element={<Logout onLogout={handleUserState} />}
+          />
+        </Routes>
       </div>
+    </div>
   );
 }
 

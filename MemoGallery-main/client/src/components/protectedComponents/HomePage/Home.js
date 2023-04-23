@@ -39,18 +39,19 @@ function HomePage() {
   useEffect(() => {
     getAllPhotos();
   }, []);
-
-  async function handleDelete() {
+  async function handleDelete(e) {
+    e.preventDefault();
     const token = localStorage.getItem("token");
     if (!token) {
       return;
     }
     await axios
-      .delete("http://localhost:8080/auth/delete", {
+      .delete("http://localhost:8080/auth/deleteAll", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
+
       .then((response) => {
         navigate("/postPhotos");
         window.location.reload();
@@ -67,14 +68,15 @@ function HomePage() {
     window.location.reload();
     // });
   }
+
   return (
     <>
       <div className="card-wrapper">
         {photos.map((photo) => {
           return (
             <div className="card" key={photo._id}>
-              <div>
-                {photo.photoUrl && <img src={photo.photoUrl} alt="photo" />}
+              <div type="file" name="file">
+                {photo.photoUrl && <img src={photo.photoUrl} alt="" />}
               </div>
               <p>{photo.description}</p>
               <button
@@ -84,15 +86,12 @@ function HomePage() {
                 like{photo.likes}
               </button>
               <input type={photo._id} />
-              <button onClick={() => handleDeleteOne(photo._id)}>
-                Delete One
-              </button>
+              <button onClick={() => handleDeleteOne(photo._id)}>Delete</button>
             </div>
           );
         })}
       </div>
-
-      <button onClick={handleDelete}>Delete</button>
+      <button onClick={handleDelete}>Delete All</button>
     </>
   );
 }
