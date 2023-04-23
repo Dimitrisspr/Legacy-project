@@ -64,7 +64,7 @@ function HomePage() {
   async function handleDeleteOne(id) {
     await axios.delete(`http://localhost:8080/auth/delete/${id}`);
     // photos.filter((photo) => {
-      window.location.reload();
+    window.location.reload();
     // });
   }
   return (
