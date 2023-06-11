@@ -13,7 +13,7 @@ const LandingPage = () => {
 
     return (
     <div >
-        <h4>This is a Gallery Storage in which you can save your photos.</h4>
+        <h4>This is a Gallery storage in which you can save your photos.</h4>
         <br/>
         <h4>In order to start working with this Storage you need to sign up and then log in.</h4> 
     </div>)
