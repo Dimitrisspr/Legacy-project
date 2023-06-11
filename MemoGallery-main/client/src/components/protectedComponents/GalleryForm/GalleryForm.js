@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import "./GalleryForm.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -44,7 +44,7 @@ function GalleryForm() {
         <div className="imageSection">
           <label>Insert Image</label>
           <input type="file" accept="images/*" onChange={uploadImage} />
-          <img src={file} style={{ width: 150, height: 20 }} />
+          <img src={file} alt="pic" style={{ width: 150, height: 20 }} />
           <input
             type="text"
             placeholder="you can insert image url"

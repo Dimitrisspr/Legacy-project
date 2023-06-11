@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Nav from "./components/freeComponents/Navbar/Nav";
@@ -8,7 +8,7 @@ import LoginForm from "./components/freeComponents/LoginForm/LoginForm";
 import HomePage from "./components/protectedComponents/HomePage/Home";
 import GalleryForm from "./components/protectedComponents/GalleryForm/GalleryForm";
 import Favorites from "./components/protectedComponents/Favorites/Favorites";
-import Logout from "./components/protectedComponents/logout/logout";
+import Logout from "./components/protectedComponents/logout/logout"; 
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
