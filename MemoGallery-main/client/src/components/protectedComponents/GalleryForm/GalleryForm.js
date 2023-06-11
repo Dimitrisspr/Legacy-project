@@ -44,7 +44,7 @@ function GalleryForm() {
         <div className="imageSection">
           <label>Insert Image</label>
           <input type="file" accept="images/*" onChange={uploadImage} />
-          <img src={file} style={{ width: 100, height: 100 }} />
+          <img src={file} style={{ width: 150, height: 20 }} />
           <input
             type="text"
             placeholder="you can insert image url"
@@ -56,12 +56,25 @@ function GalleryForm() {
         <br />
         <label>What is your memory: </label>
         <textarea
+          id="txtArea"
           type="text"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           ref={inputRef}
         />
         <br />
+        <button id="addPht" type="submit" onClick={clearInput}>
+          Add to Gallery
+        </button>
+
+        <label>What is your memory: </label>
+        <textarea
+          type="text"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          ref={inputRef}
+        />
+
         <button type="submit" onClick={clearInput}>
           Add to Gallery
         </button>

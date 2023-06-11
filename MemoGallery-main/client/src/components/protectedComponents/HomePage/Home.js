@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 function HomePage() {
   const [photos, setPhotos] = useState([true]);
+
   const navigate = useNavigate();
 
   async function getAllPhotos() {
@@ -25,10 +26,13 @@ function HomePage() {
   }
 
   async function likeButton(id) {
+    
+    
     let response = await axios.put(`http://localhost:8080/auth/likes/${id}`);
     const updatedPhotosWithLikes = photos.map((photo) => {
       if (photo._id === id) {
         return { ...photo, likes: response.data.likesNum, photoLiked: true };
+        
       } else {
         return photo;
       }
@@ -83,15 +87,15 @@ function HomePage() {
                 className="likeButton"
                 onClick={() => likeButton(photo._id)}
               >
-                like{photo.likes}
+                ❤️{photo.likes}
               </button>
               <input type={photo._id} />
-              <button onClick={() => handleDeleteOne(photo._id)}>Delete</button>
+              <button onClick={() => handleDeleteOne(photo._id)}id="delBtn">X</button>
             </div>
           );
         })}
       </div>
-      <button onClick={handleDelete}>Delete All</button>
+      <button onClick={handleDelete}id="delBtnAll">Delete All</button>
     </>
   );
 }

@@ -1,5 +1,4 @@
 const photosModel = require("../models/photosModel");
-const mongoose = require("mongoose");
 
 const postPhotos = async (req, res) => {
   const { photoUrl, description } = req.body;
@@ -25,8 +24,10 @@ const getPhotos = async (req, res) => {
   }
 };
 
+
+
 const like = async (req, res) => {
-  let liked = [];
+  let liked = []
   let id = req.params.id;
   let photo = await photosModel.findById(id);
   if (!photo) {
@@ -85,5 +86,5 @@ module.exports = {
   like,
   deletePhoto,
   deleteAll,
-  favoritePhoto,
+  favoritePhoto
 };

@@ -17,5 +17,6 @@ router.put("/likes/:id", like);
 router.delete("/deleteAll",authorize, deleteAll)
 router.delete("/delete/:id", deletePhoto)
 router.get("/favourite", favoritePhoto)
+router.get("/favorite", favoritePhoto)
 
 module.exports = router;
