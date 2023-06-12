@@ -2,6 +2,7 @@ import "./cards.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import API_URL from "../../config";
 
 function HomePage() {
   const [photos, setPhotos] = useState([true]);
@@ -14,7 +15,8 @@ function HomePage() {
       return;
     }
     console.log(token);
-    const response = await axios.get("http://localhost:8080/auth/getPhotos", {
+    // const response = await axios.get("http://localhost:8080/auth/getPhotos", {
+    const response = await axios.get(`${API_URL}/auth/getPhotos`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -26,13 +28,11 @@ function HomePage() {
   }
 
   async function likeButton(id) {
-    
-    
-    let response = await axios.put(`http://localhost:8080/auth/likes/${id}`);
+    let response = await axios.put(`${API_URL}/auth/likes/${id}`);
+    //let response = await axios.put(`http://localhost:8080/auth/likes/${id}`);
     const updatedPhotosWithLikes = photos.map((photo) => {
       if (photo._id === id) {
         return { ...photo, likes: response.data.likesNum, photoLiked: true };
-        
       } else {
         return photo;
       }
@@ -50,7 +50,7 @@ function HomePage() {
       return;
     }
     await axios
-      .delete("http://localhost:8080/auth/deleteAll", {
+      .delete(`${API_URL}/auth/deleteAll`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -67,7 +67,7 @@ function HomePage() {
   }
 
   async function handleDeleteOne(id) {
-    await axios.delete(`http://localhost:8080/auth/delete/${id}`);
+    await axios.delete(`${API_URL}/auth/delete/${id}`);
     // photos.filter((photo) => {
     window.location.reload();
     // });
@@ -90,12 +90,16 @@ function HomePage() {
                 ❤️{photo.likes}
               </button>
               <input type={photo._id} />
-              <button onClick={() => handleDeleteOne(photo._id)}id="delBtn">X</button>
+              <button onClick={() => handleDeleteOne(photo._id)} id="delBtn">
+                X
+              </button>
             </div>
           );
         })}
       </div>
-      <button onClick={handleDelete}id="delBtnAll">Delete All</button>
+      <button onClick={handleDelete} id="delBtnAll">
+        Delete All
+      </button>
     </>
   );
 }

@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import "./GalleryForm.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import API_URL from "../../config";
 
 function GalleryForm() {
   const [image, setImage] = useState("");
@@ -25,11 +26,18 @@ function GalleryForm() {
 
     const token = localStorage.getItem("token");
     await axios
-      .post("http://localhost:8080/auth/postPhotos", newPhoto, {
+      .post(`${API_URL}/auth/postPhotos`, newPhoto, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
+      
+      // await axios
+      //   .post("http://localhost:8080/auth/postPhotos", newPhoto, {
+      //     headers: {
+      //       Authorization: `Bearer ${token}`,
+      //     },
+      //   })
       .then((res) => alert(res.data));
     navigate("/postPhotos");
   }
