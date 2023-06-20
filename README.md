@@ -9,4 +9,18 @@ The  purpose of the project is the user to upload pictures that he wants to shar
 - React.Js
 - 
 
+## Website images
+Front page
+![front page](readmepics/frontpage.png)
 
+Regiser
+![Register](readmepics/register.png)
+
+Login
+![Login](readmepics/login.png)
+
+Add photo
+![Add photo](readmepics/addphoto.png)
+
+Display pictures
+![Display pictures](readmepics/displayphoto.png)
