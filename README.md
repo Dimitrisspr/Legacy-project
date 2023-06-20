@@ -1,5 +1,12 @@
-# Legacy-project Hi, welcome to our Legacy project.the goal is to change a good project and make it great.
+# Legacy-project 
+## Summary
+The  purpose of the project is the user to upload pictures that he wants to share with other people. He can upload pictures from his device or from internet as well. The user can write a comment under each picture and also like his/her picture. When the picture is liked its being transported to the page called favourite pictures.
+
+## List of technologies
+- JavaScript
+- HTML5
+- CSS
+- React.Js
+- 
 
 
-
-![hacker-python](https://user-images.githubusercontent.com/117196462/233090640-0b43d46a-28cb-4a2d-9518-f80cdf692ef3.gif)
