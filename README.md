@@ -7,7 +7,13 @@ The  purpose of the project is the user to upload pictures that he wants to shar
 - HTML5
 - CSS
 - React.Js
-- 
+- MongoDb Atlas
+- Mongoose
+- Axios
+- Bootstrap
+- Node.Js
+- Express.Js
+- JWT
 
 ## Website images
 Front page
