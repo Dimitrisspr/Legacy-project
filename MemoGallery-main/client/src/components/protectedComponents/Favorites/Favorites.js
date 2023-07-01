@@ -16,10 +16,7 @@ function Favorites() {
       setFavoritePhoto(response.data);
     }
 
-    //   const response = await axios.get(
-    //     "http://localhost:8080/auth/favorite");
-    //   setFavoritePhoto(response.data);
-    // }
+ 
 
     useEffect(() => {
       displayFavorites();

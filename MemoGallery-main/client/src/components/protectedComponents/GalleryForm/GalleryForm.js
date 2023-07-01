@@ -32,12 +32,7 @@ function GalleryForm() {
         },
       })
       
-      // await axios
-      //   .post("http://localhost:8080/auth/postPhotos", newPhoto, {
-      //     headers: {
-      //       Authorization: `Bearer ${token}`,
-      //     },
-      //   })
+ 
       .then((res) => alert(res.data));
     navigate("/postPhotos");
   }
